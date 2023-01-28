@@ -17,9 +17,11 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::get()->first();
+        $reservations = Reservation::get();
+        // dd($reservations );
         $tables= Table::with('reservations')->get();
-        return view('admin.reservations.index' , compact('reservations'),compact('tables'));
+        // dd( $tables);
+        return view('admin.reservations.index',compact('reservations'));
     }
 
     /**
@@ -30,7 +32,6 @@ class ReservationController extends Controller
     public function create()
     {
         $tables=Table::get();
-       
         $resturants=category::get();
         return view('admin.reservations.create',compact('tables'),compact('resturants')); 
     }
@@ -59,10 +60,10 @@ class ReservationController extends Controller
         
         $newreservation->save();
 
-        $newresturant= New Category();
-        $newresturant->name= $request->input('name');
-        // $newresturant->id =$newreservation->category_id;
-        $newresturant->save();
+        // $newresturant= New Category();
+        // $newresturant->name= $request->input('name');
+        // // $newresturant->id =$newreservation->category_id;
+        // $newresturant->save();
 
         $newtable= New Table();
         $newtable->id =$newreservation->table_id;
@@ -121,7 +122,7 @@ class ReservationController extends Controller
            $reservation->tel_number =$request->tel_number;
            $reservation->res_date=$request->res_date;
            $reservation->guest_number =$request->guest_number;
-        //    $reservation->table_id =$request->table_id;
+           $reservation->table_id =$request->table_id;
            $reservation->save();
 
         //    $tables = Table::findorfail($id);

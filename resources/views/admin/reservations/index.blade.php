@@ -247,7 +247,10 @@
                                     <td scope="col">{{$reservation->tel_number}}</td>
                                     <td scope="col">{{$reservation->res_date}}</td>
                                     <td scope="col">{{$reservation->guest_number}}</td>
-                                    @foreach ($tables->reservations as $item)
+                                  
+                                    @foreach ($reservation->tables ?? [] as $item)
+                                    
+                                    
                                          
                                     <td scope="col">{{$item->name}}</td>
                                     
